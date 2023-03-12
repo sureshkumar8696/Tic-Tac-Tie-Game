@@ -1,0 +1,139 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap");
+
+:root {
+  --dark-gray: #1a2a32;
+  --gray: #2e4756;
+  --turquoise: #3cc4bf;
+  --yellow: #f2b147;
+  --light-gray: #d3d3d3;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--dark-gray);
+  font-family: "Montserrat", sans-serif;
+}
+
+h1 {
+  margin: 20px;
+  text-align: center;
+  margin-top: 30px;
+  color: white;
+}
+
+.game {
+  width: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  background-color: var(--gray);
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  gap: 20px;
+  margin: 4px 4px;
+
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+}
+
+.cell:hover {
+  cursor: pointer;
+  opacity: 90%;
+}
+
+/* Add styles to show X or O */
+
+
+
+.x {
+  color: var(--yellow);
+  }
+  
+  /* Styles for O */
+  .o {
+  color:var(--turquoise);
+  }
+
+.scoreboard {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.scoreboard h2 {
+  color: white;
+  margin: 10px;
+  
+}
+
+.player1-score{
+  font-weight: bold;
+  color: var(--yellow);
+  display: inline-block;
+  margin-right: 20px;
+  
+}
+.player2-score {
+  font-weight: bold;
+  color: var(--turquoise);
+  display: inline-block;
+  margin-right: 20px;
+}
+
+/* Add styles to highlight the active player */
+.active-player {
+  font-weight: bold;
+}
+
+/* Add styles to show the winner */
+.winner {
+  font-weight: bold;
+  color: #4caf50;
+}
+
+.buttons {
+  margin-top: 20px;
+  text-align: center;
+}
+
+button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--gray);
+  color:white;
+  font-weight: 20px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+
+button:hover {
+  /* background-color: #006b8f; */
+  
+  background-color: var(--turquoise);
+  opacity: 70%;
+  color: #2a4544;
+  border-radius: 5px;
+}
