@@ -3,7 +3,7 @@ let currentPlayer = "X";
 let player1Score = 0;
 let player2Score = 0;
 let isGameOver = false;
-const win = new Audio('./Audio/win.mp3')
+const win = new Audio("./Audio/win.mp3");
 // Get game cells and scoreboard elements
 const cells = document.querySelectorAll(".cell");
 const player1ScoreElement = document.getElementById("player1-score");
@@ -11,7 +11,23 @@ const player2ScoreElement = document.getElementById("player2-score");
 const resetButton = document.getElementById("reset-btn");
 const newRoundButton = document.getElementById("new-round-btn");
 
+const icon = document.querySelector(".symbol");
+const text = document.querySelector("p");
 // Add click event listener to game cells
+function player1() {
+  icon.classList.remove("fa-x", "yellow");
+  icon.classList.add("fa-o", "turquoise");
+  text.textContent = "Player 2, you're up!";
+  text.classList.remove("yellow");
+  text.classList.add("turquoise");
+}
+function player2() {
+  icon.classList.remove("fa-o", "turquoise");
+  icon.classList.add("fa-x", "yellow");
+  text.textContent = "Player 1, you're up!";
+  text.classList.remove("turquoise");
+  text.classList.add("yellow");
+}
 cells.forEach((cell) => {
   cell.addEventListener("click", () => {
     // Check if game is over
@@ -23,17 +39,19 @@ cells.forEach((cell) => {
     if (cell.textContent !== "") {
       return;
     }
-    const xSound = new Audio('./Audio/xTone.mp3');
-    const oSound = new Audio('./Audio/OTone.mp3');
+    const xSound = new Audio("./Audio/xTone.mp3");
+    const oSound = new Audio("./Audio/OTone.mp3");
     // Update cell and current player
     cell.textContent = currentPlayer;
-    cell.className = `${currentPlayer === 'X' ? 'x' : 'o'} cell`;
-    if (currentPlayer === 'X') {
+    cell.className = `${currentPlayer === "X" ? "x" : "o"} cell`;
+    if (currentPlayer === "X") {
+      player1();
       xSound.play();
     } else {
+      player2();
       oSound.play();
     }
-    
+
     currentPlayer = currentPlayer === "X" ? "O" : "X";
 
     // Check for winner
@@ -59,7 +77,6 @@ newRoundButton.addEventListener("click", startNewRound);
 
 // Function to check for winner
 function checkForWinner() {
-  
   const winningCombinations = [
     [0, 1, 2],
     [3, 4, 5],
@@ -79,9 +96,15 @@ function checkForWinner() {
       cells[a].textContent === cells[b].textContent &&
       cells[a].textContent === cells[c].textContent
     ) {
+      if (currentPlayer === "X") {
+        player1();
+        text.textContent = "Player 2, Win!";
+      } else {
+        player2();
+        text.textContent = "Player 1, Win!";
+      }
       win.play();
       return true;
-
     }
   }
 
@@ -90,14 +113,14 @@ function checkForWinner() {
 
 // Function to check for tie game
 function checkForTieGame() {
-  const errorSound = new Audio('./Audio/error.mp3')
+  const errorSound = new Audio("./Audio/error.mp3");
   for (let i = 0; i < cells.length; i++) {
     if (cells[i].textContent === "") {
       return false;
     }
   }
 
-  errorSound.play()
+  errorSound.play();
   // alert("Tie game!");
   // resetGame();
   return true;
@@ -109,17 +132,19 @@ function updateScoreboard() {
     player2Score++;
     player2ScoreElement.textContent = player2Score;
     // alert("Player 2 wins!");
-    
   } else {
     player1Score++;
     player1ScoreElement.textContent = player1Score;
     // alert("Player 1 wins!");
-    
   }
 }
 
 // Function to reset game
 function resetGame() {
+  // const ele = document.querySelector(".symbol")
+  // ele.style.animation ="animation: 0.6s ease-in-out turn-icon-animation"
+  player2();
+
   win.pause();
   cells.forEach((cell) => {
     cell.textContent = "";
@@ -131,6 +156,7 @@ function resetGame() {
 
 // Function to start new round
 function startNewRound() {
+  player2();
   resetGame();
   player1Score = 0;
   player2Score = 0;
